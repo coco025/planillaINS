@@ -212,18 +212,18 @@ function createFile(header, lines, name){
 	var data = "";
 	
 	for (var x = 0; x < header.length; x++){
-		data += header[x] + "\n";
+		data += header[x] + "\r\n";
 	}
 	
 	for (var x = 0; x < lines.length; x++){
-		data += lines[x] + "\n";
+		data += lines[x] + "\r\n";
 	}
 	
 	var blob = new Blob([data],{type: "text/plain"});
  
 	// download the file:
 	download(blob, name);
-	
+	//saveAs(blob, name);
 	
  
 }
@@ -303,5 +303,3 @@ function deleteChars(data){
 	data = data.replace("Ü", "U");
 	return data;
 }
-
-
