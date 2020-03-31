@@ -12,7 +12,6 @@ function getInfoByUser(id, company){
 
 var firstLineH;
 // Lee un archivo y lo convierte en el formato requerido
-
 function convertFile(){
 	
 	document.getElementById("process").style.display = "";
