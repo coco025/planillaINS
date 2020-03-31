@@ -1,6 +1,6 @@
 var xmlhttp = new XMLHttpRequest();
 var urlWS = "http://186.176.206.154:8088/business/get_EmployeeInfoExactus?"
-import { saveAs } from 'file-saver';
+//import { saveAs } from 'file-saver';
 
 // Llamada al Web Service
 function getInfoByUser(id, company){
@@ -12,15 +12,6 @@ function getInfoByUser(id, company){
 
 var firstLineH;
 // Lee un archivo y lo convierte en el formato requerido
-
-function reload(){
-	document.getElementById("process").innerHTML = "Hi";
-}
-
-async function reload(percentage){
-	
-	document.getElementById("process").innerHTML = toString(percentage) + "%";
-}
 
 function convertFile(){
 	
