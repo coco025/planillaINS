@@ -25,8 +25,11 @@ function convertFile(){
 	var resultLines = [];
 	var companyPolicy;
 	
+	reader.onerror = function(evt){
+		alert("Ha ocurrido un error al leer el archivo, verifique el contenido del mismo o contáctese con el administrador del sistema");
+	}
+	
 	reader.onload = function(progressEvent){
-		alert("ready");
 		var line;
 		var secondLine = "Email " + "mzuniga@grupointeca.com";
 		var thirdLine;
@@ -115,15 +118,14 @@ function convertLine(list, policy){
 	var parser = new DOMParser();
 
 	getInfoByUser(list[1], policy);
-	//alert(xmlhttp.responseText);
-	//console.log(xmlhttp.responseText);
-	
+
 	var infoByUser;
 	
 	try {
 		infoByUser = parser.parseFromString(xmlhttp.responseText,"text/xml").getElementsByTagName("string")[0].childNodes[0].nodeValue.split(",");
 	}
 	catch(error) {
+		alert("ERROR CON EL CÓDIGO DE PERSONA: " + list[1])
 		console.log("ERROR: " + list[1])
 		return list[1];
 	}
@@ -223,9 +225,6 @@ function createFile(header, lines, name){
  
 	// download the file:
 	download(blob, name);
-	//saveAs(blob, name);
-	
- 
 }
 
 // Despliega la ventana para guardar el archivo resultante
