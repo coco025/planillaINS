@@ -1,6 +1,5 @@
 var xmlhttp = new XMLHttpRequest();
 var urlWS = "http://186.176.206.154:8088/business/get_EmployeeInfoExactus?"
-//import { saveAs } from 'file-saver';
 
 // Llamada al Web Service
 function getInfoByUser(id, company){
@@ -63,7 +62,6 @@ function convertFile(){
 			}
 		}
 		
-		
 		resultHeader.push(firstLineH.toString().replace(/,/g, ""))
 		resultHeader.push(secondLine)
 		resultHeader.push(thirdLine)
@@ -103,6 +101,10 @@ function firstLine(data){
 	return [info1 , tomador , telefono , fax , calendario , vPlanilla , codExcel]
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // La magia
 function convertLine(list, policy){
 	
@@ -118,19 +120,18 @@ function convertLine(list, policy){
 	var parser = new DOMParser();
 
 	getInfoByUser(list[1], policy);
-
+	
 	var infoByUser;
 	
 	try {
 		infoByUser = parser.parseFromString(xmlhttp.responseText,"text/xml").getElementsByTagName("string")[0].childNodes[0].nodeValue.split(",");
 	}
 	catch(error) {
-		alert("ERROR CON EL CÓDIGO DE PERSONA: " + list[1])
+		alert("ERROR CON EL CÓDIGO DE LA PERSONA: " + list[1])
 		console.log("ERROR: " + list[1])
 		return list[1];
 	}
-	
-	
+
 	if(infoByUser.length == 0){
 		//alert("No encontrado: ", list[1])
 		return list[1] + list[2] + list[3] + list[4];
@@ -224,7 +225,7 @@ function createFile(header, lines, name){
 	var blob = new Blob([data],{type: "text/plain"});
  
 	// download the file:
-	download(blob, name);
+	download(blob, "Planilla Corregida v2 - " + name);
 }
 
 // Despliega la ventana para guardar el archivo resultante
